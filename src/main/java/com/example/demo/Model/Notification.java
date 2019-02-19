@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="notification")
@@ -25,7 +28,7 @@ public class Notification {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User user;
+	private User user;// user who received this notifications
 	
 	
 	
