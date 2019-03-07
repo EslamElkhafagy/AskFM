@@ -9,6 +9,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,21 +22,14 @@ public class Follower {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "friend_id")
+	@JoinColumn(name = "friend_id", referencedColumnName = "id")
 	private User friendFollow;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User userFollow;
 
-	public User getFriendFollow() {
-		return friendFollow;
-	}
-
-	public void setFriendFollow(User friendFollow) {
-		this.friendFollow = friendFollow;
-	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -44,13 +38,6 @@ public class Follower {
 		this.id = id;
 	}
 
-	public User getfriendFollow() {
-		return friendFollow;
-	}
-
-	public void setfriendFollow(User friendFollow) {
-		this.friendFollow = friendFollow;
-	}
 
 	public User getUserFollow() {
 		return userFollow;
@@ -58,6 +45,14 @@ public class Follower {
 
 	public void setUserFollow(User userFollow) {
 		this.userFollow = userFollow;
+	}
+
+	public User getFriendFollow() {
+		return friendFollow;
+	}
+
+	public void setFriendFollow(User friendFollow) {
+		this.friendFollow = friendFollow;
 	}
 
 }

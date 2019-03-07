@@ -1,11 +1,11 @@
-package com.example.demo.Controller;
+package com.example.demo.Services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,42 +15,35 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.Model.Follower;
 import com.example.demo.Repository.FollowerRepository;
-import com.example.demo.Services.FollowerService;
 
-@Controller
-@RequestMapping("/friends")
-public class FollowerController {
+@Service
+public class FollowerService {
 
 	@Autowired
-	FollowerService followerService;
+	FollowerRepository followerRepository;
 
-	@RequestMapping(value = "/follow",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	public void Follow(@RequestBody Follower follower) {
+	
+	public void Follow(Follower follower) {
 
-		followerService.Follow(follower);
+		followerRepository.save(follower);
 
 		System.out.println("Friends Connected !");
 
 	}
 
-	@RequestMapping(value = "/unfollow", method = RequestMethod.DELETE)
-	public void unFollow(@RequestParam int id) {
-		followerService.unFollow(id);
+	public void unFollow( int id) {
+		followerRepository.deleteById(id);
 		System.out.println("unFollow Friends !");
 
 	}
 	
-	@RequestMapping("")
-	@ResponseBody
 	public List<Follower> getFriends(@RequestParam int  id){
 		
 		
-	return	followerService.getFriends(id);
+	return	followerRepository.findByUserFollowId(id);
 	}
 	
 	
-
+	
+	
 }

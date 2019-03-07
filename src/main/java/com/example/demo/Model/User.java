@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "user")
 public class User {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -47,15 +48,12 @@ public class User {
 	 * 
 	 * */
 	@OneToMany(mappedBy = "recUser", cascade = CascadeType.ALL)
-//	@JsonIgnore
-//	 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonIgnoreProperties(value="recUser", allowSetters=true)
-	private Set<Question> reciver_questions = new HashSet<>();
+	@JsonIgnore
+	private List<Question> reciver_questions = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "senderUser", cascade = CascadeType.ALL)
-//	@JsonIgnore
-//	 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonIgnoreProperties(value="senderUser", allowSetters=true)
-	private Set<Question> sender_questions = new HashSet<>();
+	@JsonIgnore
+	private List<Question> sender_questions = new ArrayList<>();
 	
 	
 	
@@ -66,49 +64,52 @@ public class User {
 	 * */
 
 	@OneToMany(mappedBy = "userFollow", cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JsonIgnore
-	private Set<Follower> followers = new HashSet<>();
+	private List<Follower> followers = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "friendFollow", cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JsonIgnore
-	private Set<Follower> friendfollowers = new HashSet<>();
+	private List<Follower> friendfollowers = new ArrayList<>();
 	
 	
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Notification> notifications = new HashSet<>();
+	private List<Notification> notifications = new ArrayList<>();
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Answer answer;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Like like;
 
 	
 	
 	
-	public Set<Question> getReciver_questions() {
+	
+
+	public List<Question> getReciver_questions() {
 		return reciver_questions;
 	}
 
-	public void setReciver_questions(Set<Question> reciver_questions) {
+	public void setReciver_questions(List<Question> reciver_questions) {
 		this.reciver_questions = reciver_questions;
 	}
 
-	public Set<Question> getSender_questions() {
+	public List<Question> getSender_questions() {
 		return sender_questions;
 	}
 
-	public void setSender_questions(Set<Question> sender_questions) {
+	public void setSender_questions(List<Question> sender_questions) {
 		this.sender_questions = sender_questions;
 	}
 
-	public Set<Follower> getFriendfollowers() {
+	public List<Follower> getFriendfollowers() {
 		return friendfollowers;
 	}
 
-	public void setFriendfollowers(Set<Follower> friendfollowers) {
+	public void setFriendfollowers(List<Follower> friendfollowers) {
 		this.friendfollowers = friendfollowers;
 	}
 
@@ -128,27 +129,19 @@ public class User {
 		this.like = like;
 	}
 
-//	public Set<Question> getsender_questions() {
-//		return sender_questions;
-//	}
-//
-//	public void setsender_questions(Set<Question> questions) {
-//		this.sender_questions = questions;
-//	}
-
-	public Set<Follower> getFollowers() {
+	public List<Follower> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(Set<Follower> followers) {
+	public void setFollowers(List<Follower> followers) {
 		this.followers = followers;
 	}
 
-	public Set<Notification> getNotifications() {
+	public List<Notification> getNotifications() {
 		return notifications;
 	}
 
-	public void setNotifications(Set<Notification> notifications) {
+	public void setNotifications(List<Notification> notifications) {
 		this.notifications = notifications;
 	}
 
@@ -288,4 +281,19 @@ public class User {
 		this.backgroundImagePath = backgroundImagePath;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", fullName=" + fullName
+				+ ", email=" + email + ", birthDay=" + birthDay + ", gender=" + gender + ", location=" + location
+				+ ", bio=" + bio + ", web=" + web + ", hashTags=" + hashTags + ", allowAnonQuestion="
+				+ allowAnonQuestion + ", allowSharePosts=" + allowSharePosts + ", allowOnDiscoverFeed="
+				+ allowOnDiscoverFeed + ", showStatus=" + showStatus + ", profileImagePath=" + profileImagePath
+				+ ", backgroundImagePath=" + backgroundImagePath + ", reciver_questions=" + reciver_questions
+				+ ", sender_questions=" + sender_questions + ", followers=" + followers + ", friendfollowers="
+				+ friendfollowers + ", notifications=" + notifications + ", answer=" + answer + ", like=" + like + "]";
+	}
+
+	
+	
 }

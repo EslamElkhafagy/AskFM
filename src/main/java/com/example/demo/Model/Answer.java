@@ -27,6 +27,7 @@ public class Answer {
 	private Question question;
 
 	@OneToOne(mappedBy = "answer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Like like;
 
 	@OneToOne

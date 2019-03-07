@@ -5,43 +5,61 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 //import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.Model.Answer;
 import com.example.demo.Repository.AnswerRepository;
+import com.example.demo.Services.AnswerService;
 
 @Controller
 @RequestMapping("/answer")
 public class AnswerController {
 
-	// insert , delete
+	// insert, delete ,  
+				/*
+				 * url and param for all methods in Answer Controller
+				 * 
+				 * 						URL						method				Body            
+				 * add ->      			/add					post				answer
+				 * delete ->   			/delete					DELETE				param (answerId:int),param (questionId:int)
+				 * 
+				 * */
 	
 	@Autowired
-	AnswerRepository answerRepository;
+	AnswerService answerService;
 	
-	@RequestMapping(value="/add", method = RequestMethod.POST,headers="Accept=application/json",consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value="/add", method = RequestMethod.POST,headers="Accept=application/json",consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code=HttpStatus.ACCEPTED)
 	public void addAnswer(@RequestBody Answer answer) {
 		
-		answerRepository.save(answer);
+		answerService.addAnswer(answer,answer.getQuestion().getId());
 		System.out.println("Answer Saved !");
 		
 		
 	}
 	
 	@RequestMapping(value="/delete", method = RequestMethod.DELETE)
-	public void deleteAnswer(@RequestParam int id) {
+	public void deleteAnswer(@RequestParam int answerId ,@RequestParam int questionId) {
 		
-		answerRepository.deleteById(id);
-		System.out.println("Answer deleted !");
+		answerService.deleteAnswer(answerId,questionId);
+			
+	}
 
-		// add column answerstate " boolean " then update this answer to false
-		// code update here 
+	
+	// for testing only , until now
+	@RequestMapping(value="/getanswer/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Answer getAnswerById(@PathVariable(value="id") int id) {
 		
+		Answer answer =answerService.getAnswerById(id);
+		
+		return answer;
 		
 	}
 	

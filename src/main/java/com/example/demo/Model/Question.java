@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.jboss.logging.FormatWith;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,29 +27,33 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "question")
 public class Question {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String contentQue; // qustion text
+	private String contentQue; // question text
 
 	@ManyToOne
-	@JoinColumn(name = "sender_id")
-//	@JsonBackReference
-    @JsonIgnoreProperties(value="sender_questions", allowSetters=true)
+	@JoinColumn(name = "sender_id", referencedColumnName = "id")
+//	@JsonIgnore
 	private User senderUser;
+	
 	@ManyToOne
-	@JoinColumn(name = "reciver_id")
-//	@JsonBackReference
-    @JsonIgnoreProperties(value="reciver_questions", allowSetters=true)
+	@JoinColumn(name = "receiver_id", referencedColumnName = "id")
+//	@JsonIgnore
 	private User recUser;
 
+	
 	@Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	
 	private boolean visableName;
+	
+	private boolean answerCond;// question is answered or not
+	
 
 	@OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Answer answer;
 
 	public User getSenderUser() {
@@ -104,4 +112,20 @@ public class Question {
 		this.visableName = visableName;
 	}
 
+	public boolean isAnswerCond() {
+		return answerCond;
+	}
+
+	public void setAnswerCond(boolean answerCond) {
+		this.answerCond = answerCond;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", contentQue=" + contentQue + ", senderUser=" + senderUser + ", recUser="
+				+ recUser + ", date=" + date + ", visableName=" + visableName + ", answerCond=" + answerCond
+				+ ", answer=" + answer + "]";
+	}
+
+	
 }

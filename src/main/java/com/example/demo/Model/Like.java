@@ -22,7 +22,7 @@ public class Like {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
 
