@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,11 +30,11 @@ public class Answer {
 	@JoinColumn(name = "question_id")
 	private Question question;
 
-	@OneToOne(mappedBy = "answer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Like like;
+	private List<Like> like;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user; // user answer for the questions
 
@@ -52,11 +56,11 @@ public class Answer {
 		this.count = count;
 	}
 
-	public Like getLike() {
+	public List<Like> getLike() {
 		return like;
 	}
 
-	public void setLike(Like like) {
+	public void setLike(List<Like> like) {
 		this.like = like;
 	}
 

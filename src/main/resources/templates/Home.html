@@ -1,5 +1,7 @@
  <!DOCTYPE html>
-<html>
+<html
+xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         
@@ -33,58 +35,41 @@
     <!--    End Custom Navbar  -->
 
      <!--   Start form  -->
-
-        <form class="signup">
+        <form class="signup" th:action="@{/user/add}" th:object="${user}" method="post">
+        
         <div class="color"> 
         <div class="container2">
-            <input type="text" name="username" placeholder="username"> <br>
-             <input type="password" name="pass" placeholder="password"> <br>
-              <input type="text" name="username" placeholder="full name"><br>
-               <input type="Email" name="Email" placeholder="Email"> <br>
+            <input type="text" name="userName" placeholder="username"> <br>
+             <input type="password" name="passWord" placeholder="password"> <br>
+              <input type="text" name="fullName" placeholder="full name"><br>
+               <input type="Email" name="email" placeholder="Email"> <br>
                <div class="row">
-               <h4>birtdate</h4>
+               <h4>birth date</h4>
                  <select class="col-xs-4">
-                    
                     <option selected disabled>Day</option>
-                     
                 </select>
-
                     <select class="col-xs-4">
-                    
                     <option selected disabled>Months</option>
-                     
                 </select>
-
                     <select class="col-xs-4">
-                    
                     <option selected disabled>Year</option>
-                     
                 </select>
                 </div>
-            
                <h4>Gender</h4>
                 <select class="Gender">
-                    
                     <option>Male</option>
                      <option>Female</option>
                 </select>
-
                  <h4>Language</h4>
-
                    <select class="Language">
-                    
                     <option selected>English</option>
-                    
                 </select>
-
-
                 <p>By signing up you agree to our <span> <a>Terms</a></span>  and <SPAN> <a href=""> Privacy policy</a></SPAN></p>
-
-                <a href="#" class="btn">Sign Up</a>
+<input type="submit" value="Sign Up" class="btn">
+               <!--  <a href="#" class="btn">Sign Up</a>  -->
                 <div class="clear"></div>
                 <p>Your name and any information posted on your profile will be visible to other users. Information you provide may be shared with third parties as explained in our <span> <a href="">Privacy policy.</a></span>  Please don’t provide any information you don’t want shared.</p>
                 </div>
-
                 </div>
 
         </form>

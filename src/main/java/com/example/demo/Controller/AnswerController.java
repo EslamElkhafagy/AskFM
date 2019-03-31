@@ -43,11 +43,12 @@ public class AnswerController {
 		
 		
 	}
-	
+	@ResponseBody
 	@RequestMapping(value="/delete", method = RequestMethod.DELETE)
-	public void deleteAnswer(@RequestParam int answerId ,@RequestParam int questionId) {
+	public String deleteAnswer(@RequestParam int answerId ,@RequestParam int questionId) {
 		
 		answerService.deleteAnswer(answerId,questionId);
+		return " ay 7aga";
 			
 	}
 

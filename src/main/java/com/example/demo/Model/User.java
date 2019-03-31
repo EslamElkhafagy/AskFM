@@ -76,13 +76,13 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Notification> notifications = new ArrayList<>();
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Answer answer;
+	private List<Answer> answer;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Like like;
+	private List<Like> like;
 
 	
 	
@@ -113,19 +113,19 @@ public class User {
 		this.friendfollowers = friendfollowers;
 	}
 
-	public Answer getAnswer() {
+	public List<Answer> getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(Answer answer) {
+	public void setAnswer(List<Answer> answer) {
 		this.answer = answer;
 	}
 
-	public Like getLike() {
+	public List<Like> getLike() {
 		return like;
 	}
 
-	public void setLike(Like like) {
+	public void setLike(List<Like> like) {
 		this.like = like;
 	}
 

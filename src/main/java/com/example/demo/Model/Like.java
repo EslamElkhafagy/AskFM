@@ -22,11 +22,11 @@ public class Like {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user; // user make like for friends answer
 

@@ -1,5 +1,7 @@
 package com.example.demo.Services;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,9 +27,10 @@ public class AnswerService {
 
 	/*
 	 * @param answer this contain answer info.
+	 * 
 	 * @param questionid for update answercond in question table
-	 * */
-	
+	 */
+
 	public void addAnswer(Answer answer, int questionId) {
 
 		questionService.answeredQuestion(questionId);// to update question answerCond from false to true
@@ -37,23 +40,25 @@ public class AnswerService {
 
 	}
 
-	
 	/*
-	 * @param answerId to remove this answer 
+	 * @param answerId to remove this answer
+	 * 
 	 * @param questionid to update answercond in question table to false
-	 * */
+	 */
 	public void deleteAnswer(int answerId, int questionId) {
 
-		questionService.answeredQuestion(questionId);// to update question answerCond from true to false
+		System.out.println("Answer id  = " + answerId + " question id = " + questionId);
+
+		 questionService.answeredQuestion(questionId);// to update question answerCond
+		// from true to false
 
 		// answerRepository.deleteById(answerId);
 		answerRepository.deleteById(answerId);
+
 		System.out.println("Answer deleted !");
-		
 
 	}
 
-	
 	// just for testing
 	public Answer getAnswerById(int id) {
 
@@ -68,4 +73,6 @@ public class AnswerService {
 
 	}
 
+	
+	
 }

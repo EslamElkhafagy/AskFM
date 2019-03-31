@@ -39,10 +39,13 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/add",
+			method = RequestMethod.POST/*,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE*/)
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	public void addUser(@RequestBody User user) {
-
+       System.out.println(user.toString());
+       
 		userService.addUser(user);
 
 		System.out.println("user Saved !");
