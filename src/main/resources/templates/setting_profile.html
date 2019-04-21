@@ -1,14 +1,17 @@
  <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org" >
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type"
+	content="application/json; charset=UTF-8" />
+
         
         <title>Setting | Ask.fm</title>
         <link rel="shortcut icon" href="image/logo.png">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/normalaize.css">
-         <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/settin-profile.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/normalaize.css">
+         <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/settin-profile.css">
     </head>
 
     <body>
@@ -41,7 +44,7 @@
              <!-- ------------------------------- end navbar--------------------------------- -->
 
 
-           <!-- ------------------------------- Strrt Main Setting--------------------------------- -->
+           <!-- ------------------------------- Start Main Setting--------------------------------- -->
 
            	<section>
            		<div class="container2 row">
@@ -56,26 +59,27 @@
                             </div>
 
                             <div class="info col-sm-12">
-                            <form class="profile">
-
+                            <form class="profile" th:action="@{/user/update}" th:object="${user}" method="post">
+<input type="hidden" th:field="*{id}">
                             <h4>Full Name</h4>
-                            <input type="text" name="fullname" value="">
-
+                            <input type="text" name="fullname" th:field="*{fullName}" th:value="${fullName}">
+ 
                             <h4>Location</h4>
-                             <input type="text" name="Location" value="">
+                             <input type="text" name="Location" th:field="*{location}" th:value="${location}">
                              <h4>bio</h4>
-                             <textarea></textarea>
+                             <textarea type="text" th:field="*{bio}"></textarea>
                              <span>A little information about yourself </span>
                             	<h4>Web</h4>	
-                             <textarea></textarea>
+                             <textarea type="text" th:field="*{web}"></textarea>
                              <h4>Add hashtags</h4>
-                             <input class="hash" type="text" name="hashtags" value="#">
+                             <input type="text" name="hashTags" th:field="*{hashTags}" th:value="${hashTags}">
                              <span>Don’t post personal info in hashtags such as your home address or phone number</span>
                              <h4>Username</h4>	
-                             <input class="disapled" type="text" name="Username" value="AshrafZidan125" >
+                             <input class="disapled" type="text" name="Username" th:field="*{userName}" th:value="${userName}">
                              <span>Username can not be changed</span>
                              <h4>Email</h4>
-                             <input class="disapled" type="Email" name="Email" >
+                             <input type="text" name="email" th:field="*{email}" th:value="${email}">
+                             
                              <a class="info-email">Change email</a> <br>
 							<a class="info-email">Resend confirmation email</a>
 							<h4>Birthday</h4>
@@ -172,6 +176,7 @@
                             </div>
 
            	</section>
+           	
             <section class="setting-account">
              <div class="container2 row">
                 <div >
@@ -186,8 +191,8 @@
 
            <!-- ------------------------------- End Main Setting--------------------------------- -->
 
- <script src="js/jquery-1.12.0.min.js" type="text/javascript"></script>
-       <script src="js/bootstrap.min.js" type="text/javascript"></script>
-      <script src="js/custom.js" type="text/javascript"></script>
+ <script src="/js/jquery-1.12.0.min.js" type="text/javascript"></script>
+       <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+      <script src="/js/custom.js" type="text/javascript"></script>
     </body>
 </html>

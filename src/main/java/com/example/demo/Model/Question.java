@@ -34,12 +34,12 @@ public class Question {
 
 	@ManyToOne
 	@JoinColumn(name = "sender_id", referencedColumnName = "id")
-//	@JsonIgnore
+	@JsonIgnore
 	private User senderUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "receiver_id", referencedColumnName = "id")
-//	@JsonIgnore
+	@JsonIgnore
 	private User recUser;
 
 	

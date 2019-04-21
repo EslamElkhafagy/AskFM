@@ -1,12 +1,15 @@
 package com.example.demo.Controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,17 +43,17 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(value = "/add",
-			method = RequestMethod.POST/*,
-			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE*/)
-	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	public void addUser(@RequestBody User user) {
+			method = RequestMethod.POST)
+	public String addUser(@ModelAttribute User user) {
        System.out.println(user.toString());
        
 		userService.addUser(user);
 
 		System.out.println("user Saved !");
+		return "index";
 
 	}
+	
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	// @ResponseStatus(code=HttpStatus.NO_CONTENT)
@@ -62,15 +65,15 @@ public class UserController {
 
 	
 	
-	@RequestMapping(value = "/update", method = RequestMethod.PUT)
-	public void updateUser(@RequestBody User user, @RequestParam int id) {
-
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateUser(@ModelAttribute User user, @RequestParam int id) {
+System.out.println("id ===========  "+id);
 		userService.updateUser(user, id);;
 		
 		System.out.println("User Updated !");
 	
 		
-
+		return "setting_profile";
 	}
 
 	
@@ -106,6 +109,9 @@ public void getAllUsers() {
 userService.getAllUsers();
 	
 }
+
+
+
 
 
 

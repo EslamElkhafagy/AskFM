@@ -60,9 +60,9 @@ public class UserService {
 		upUser.setEmail(user.getEmail());
 		upUser.setFullName(user.getFullName());
 		upUser.setGender(user.getGender());
-		upUser.setHashTags(upUser.getHashTags());
+		upUser.setHashTags(user.getHashTags());
 		upUser.setLocation(user.getLocation());
-		upUser.setPassWord(user.getPassWord());
+//		upUser.setPassWord(user.getPassWord());
 		upUser.setProfileImagePath(user.getProfileImagePath());
 		upUser.setShowStatus(user.getShowStatus());
 		upUser.setUserName(user.getUserName());
