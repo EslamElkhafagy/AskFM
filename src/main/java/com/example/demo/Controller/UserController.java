@@ -68,6 +68,7 @@ public class UserController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute User user, @RequestParam int id) {
 System.out.println("id ===========  "+id);
+System.out.println(user.toString());
 		userService.updateUser(user, id);;
 		
 		System.out.println("User Updated !");

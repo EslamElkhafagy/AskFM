@@ -59,10 +59,17 @@
 						<option selected disabled>Year</option>
 					</select>
 				</div>
+				
+				<!-- 
+				to get vlaue from dropDowns .. make a Enum class with values and using th:each 
+				 -->
 				<h4>Gender</h4>
-				<select class="Gender">
-					<option>Male</option>
-					<option>Female</option>
+				<select class="Gender" th:field="*{gender}">
+					<option 
+					th:each="gendervalue: ${T(com.example.demo.Services.GenderValue).values()}" 
+					th:value="${gendervalue.name()}"
+					th:text="${gendervalue.name()}"
+					>Male</option>
 				</select>
 				<h4>Language</h4>
 				<select class="Language">

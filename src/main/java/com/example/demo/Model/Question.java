@@ -32,14 +32,14 @@ public class Question {
 	private int id;
 	private String contentQue; // question text
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "sender_id", referencedColumnName = "id")
-	@JsonIgnore
+//	@JsonIgnore
 	private User senderUser;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "receiver_id", referencedColumnName = "id")
-	@JsonIgnore
+//	@JsonIgnore
 	private User recUser;
 
 	

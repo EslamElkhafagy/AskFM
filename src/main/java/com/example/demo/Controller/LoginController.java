@@ -32,10 +32,10 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public String checkLogin(@ModelAttribute("user") User user, HttpSession session , Model model ) {
 		System.out.println("::::::::::::::::::::");
-		System.out.println(user.toString());
+//		System.out.println(user.toString());
 		System.out.println("::::::::::::::::::::");
 		User userlogin=loginService.checkValid(user);
-		System.out.println(userlogin.toString());
+//		System.out.println(userlogin.toString());
 		
 		model.addAttribute("user", userlogin);
 		session.setAttribute("userlogin",userlogin );

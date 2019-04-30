@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +38,12 @@ public class QuestionController {
 	QuestionService questionService;
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void addQuestion(@RequestBody Question question) {
+	public String addQuestion(@RequestBody Question question) {
 		
 		questionService.addQuestion(question);
 		
 		System.out.println("Questions Saved !");
-			
+			return "index";
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.DELETE)
@@ -55,12 +56,13 @@ public class QuestionController {
 	 
 	@RequestMapping(value="/getquestions", method=RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 //	@RequestMapping(value="/getquestions/{id}", method=RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public List<Question> getUserQuestions(@RequestParam int id) {
+//	@ResponseBody
+	public String getUserQuestions(@RequestParam int id , Model model) {
 	System.out.println(id);
 		List<Question> all = questionService.getUserQuestions(id);
 //		System.out.println(all.toString());
-		return all;
+		model.addAttribute("questions",all );
+		return "question";
 		
 	}
 	
