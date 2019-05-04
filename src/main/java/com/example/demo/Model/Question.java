@@ -120,12 +120,7 @@ public class Question {
 		this.answerCond = answerCond;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", contentQue=" + contentQue + ", senderUser=" + senderUser + ", recUser="
-				+ recUser + ", date=" + date + ", visableName=" + visableName + ", answerCond=" + answerCond
-				+ ", answer=" + answer + "]";
-	}
+	
 
 	
 }

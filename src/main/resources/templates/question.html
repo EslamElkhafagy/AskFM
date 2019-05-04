@@ -22,7 +22,7 @@ xmlns:th="http://www.thymeleaf.org" >
                     <ul >
                         <li><a href="index.html">Feed</a></li>
                         <li class="active"><a href="question.html">Question</a></li>
-                        <li><a href="profile.html">Profile</a></li>
+                        <li><a th:href="@{/profile}">Profile</a></li>
                         <li><a href="friends.html">Friends</a></li>
                        <li><a href="notification.html">Notification</a> <span>4</span></li>
                         <li class="menu">
@@ -69,11 +69,10 @@ xmlns:th="http://www.thymeleaf.org" >
 
                          <div class="question_answer">
                             <h3 class="h3" th:text="${question.contentQue}">How Are You ? </h3>
-                              <a href="#" th:text="${question.visableName}? '${question.receiver_id.userName}':''">Account name</a>
+                              <a th:href="@{/user/getuser/{userName}(userName=${question.senderUser.userName})}" th:if="${question.visableName}" th:text="${question.senderUser.userName}">Account name</a>
                               <p th:text="${question.date}">About 1 hr</p>
                               <a href="#"><i class="fa fa-times delete" aria-hidden="true"></i></a>
-                              <a href="answerpeople.html" class="answer answer_btn">Answer <i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                           
+                              <a th:href="@{/answerQuestion/{questionId}(questionId=${question.id})}" class="answer answer_btn">Answer <i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
                             </div>
                        </section>
                         

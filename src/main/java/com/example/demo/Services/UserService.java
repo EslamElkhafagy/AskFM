@@ -87,14 +87,14 @@ return usr;
 	/*
 	 * @param username to get other user data
 	 */
-	public void getUserByUserName(String userName) {
+	public User getUserByUserName(String userName) {
 
 		User usr = userRepository.findByUserName(userName);
 		System.out.println("userRepository.findByUserName(userName) : " + userRepository.findByUserName(userName));
 		if (usr == null)
 			System.out.println("userNotFound");
-		else
-			System.out.println(usr.toString());
+		
+			return usr;
 
 	}
 

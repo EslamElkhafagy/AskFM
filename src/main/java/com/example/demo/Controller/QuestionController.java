@@ -58,9 +58,9 @@ public class QuestionController {
 //	@RequestMapping(value="/getquestions/{id}", method=RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 //	@ResponseBody
 	public String getUserQuestions(@RequestParam int id , Model model) {
-	System.out.println(id);
 		List<Question> all = questionService.getUserQuestions(id);
 //		System.out.println(all.toString());
+		
 		model.addAttribute("questions",all );
 		return "question";
 		

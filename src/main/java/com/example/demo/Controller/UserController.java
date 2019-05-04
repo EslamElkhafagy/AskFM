@@ -1,12 +1,16 @@
 package com.example.demo.Controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.example.demo.Model.Answer;
 import com.example.demo.Model.User;
+import com.example.demo.Repository.AnswerRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Services.UserService;
 
@@ -41,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	AnswerRepository answerRepository;
 
 	@RequestMapping(value = "/add",
 			method = RequestMethod.POST)
@@ -93,10 +102,23 @@ System.out.println(user.toString());
  * @param username for view other user data
  * */
 @RequestMapping(value="/getuser/{userName}",method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)	
-public void getUserByUserName(@PathVariable(value= "userName") String userName) {
+public String getUserByUserName(@PathVariable(value= "userName") String userName ,HttpSession session,
+		Model model) {
 	
 	System.out.println("UserName : "+userName);
-	userService.getUserByUserName(userName);
+	User userprofile=	userService.getUserByUserName(userName);
+	
+	
+//	User userlogin = (User) session.getAttribute("userlogin");
+
+	model.addAttribute("user", userprofile);
+
+	System.out.println(userprofile.getId());
+	List<Answer> anslist = answerRepository.findByUserUserName(userName);
+	model.addAttribute("answers", anslist);
+
+	return "profile";
+	
 
 }	
 
